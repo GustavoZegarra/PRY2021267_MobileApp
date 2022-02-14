@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/screens/screens.dart';
+import 'package:mobile_app/themes/app_theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         'detail': (_) => DetailScreen(),
         'tab': (_) => TabScreen(),
       },
-      theme: ThemeData.light(),
+      theme: AppTheme.lightTheme
     );
   }
 }

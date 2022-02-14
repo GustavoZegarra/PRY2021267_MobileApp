@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/screens/home_screen.dart';
+import 'package:mobile_app/screens/screens.dart';
+import 'package:mobile_app/themes/app_theme.dart';
 
 class TabScreen extends StatelessWidget {
    
@@ -12,21 +13,22 @@ class TabScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
-                  Center(child: Text('General')),
-                  Center(child: Text('Quebradas')),
-                  Center(child: Text('Incidencias')),
-                  Center(child: Text('Usuario')),
+                  HomeScreen(),
+                  QuebradaScreen(),
+                  IncidenteScreen(),
+                  UsuarioScreen(),
                 ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 30),
               child: const TabBar(
-                labelColor: Colors.blue,
+                labelColor: AppTheme.primary,
                 unselectedLabelColor: Colors.grey,
+                indicatorColor: AppTheme.primary,
                 tabs: [
                   Icon(Icons.home_filled),
                   Icon(Icons.water),

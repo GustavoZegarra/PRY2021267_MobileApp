@@ -7,20 +7,31 @@ class QuebradaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Image(
-            image: AssetImage('assets/normal.jpg'),
-            width: double.infinity,
-            height: 60,
-          ),
-          Text('Nombre de la quebrada'),
-          Text('Información de la quebrada')
-        ],
-      ),
+      child: Center(
+        child: Row(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              child: const Image(
+                image: AssetImage('assets/normal.jpg'),
+                width: double.infinity,
+                height: 50,
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('asdsss')
+                ],
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }
+
+

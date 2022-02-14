@@ -8,22 +8,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text('Safety SAT'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search_outlined),
-            onPressed: () {}
-          )
+        title: const Text('Safety Rain'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(child: Text('Información de las quebradas')),
+          Center(child: Text('Quebradas activas: 4')),
+          Center(child: Text('Reportes registrados: 25')),
+          Center(child: Text('Última actualización hace 2 minutos'))
         ],
       ),
-      body: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              return QuebradaWidget();
-            },
-          ),
     );
   }
 }
