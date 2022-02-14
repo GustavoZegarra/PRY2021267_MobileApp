@@ -9,14 +9,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Sistema de Alerta Temprana',
-      initialRoute: 'home',
+      initialRoute: 'tab',
       routes: {
         'home': (_) => HomeScreen(),
         'detail': (_) => DetailScreen(),
+        'tab': (_) => TabScreen(),
       },
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
     );
   }
 }

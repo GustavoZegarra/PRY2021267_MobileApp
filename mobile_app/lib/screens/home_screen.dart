@@ -8,7 +8,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Safety SAT'),
+        backgroundColor: Colors.blue,
+        title: const Text('Safety SAT'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search_outlined),
@@ -16,13 +17,13 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column( // Cambiar a ListView
-        children: [
-        // TODO: Informacion general de las quebradas
-        CardInfo(),
-        // TODO: Listado horizontal de quebradas
-        ]
-      )
+      body: ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int index) {
+              return QuebradaWidget();
+            },
+          ),
     );
   }
 }
