@@ -9,7 +9,7 @@ class TabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         body: Column(
           children: [
@@ -18,8 +18,7 @@ class TabScreen extends StatelessWidget {
                 children: [
                   HomeScreen(),
                   QuebradaScreen(),
-                  IncidenteScreen(),
-                  UsuarioScreen(),
+                  IncidenteScreen()
                 ],
               ),
             ),
@@ -32,8 +31,7 @@ class TabScreen extends StatelessWidget {
                 tabs: [
                   Icon(Icons.home_filled),
                   Icon(Icons.water),
-                  Icon(Icons.assignment_rounded),
-                  Icon(Icons.account_circle_rounded),
+                  Icon(Icons.assignment_rounded)
                 ],
               ),
             ),
