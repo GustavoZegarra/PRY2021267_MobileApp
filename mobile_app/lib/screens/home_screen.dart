@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/models/quebrada_model.dart';
+import 'package:mobile_app/screens/screens.dart';
 import 'package:mobile_app/widgets/widgets.dart';
 import 'dart:convert';
 
 import 'package:path/path.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  HomeState createState() => HomeState();
+}
+ 
+class HomeState extends State<HomeScreen> {
   //const HomeScreen({Key? key}) : super(key: key);
   late List<Quebrada> Quebradas;
   String quebradas =
       '[{"nombre": "Quirio", "precipitacion": 5.69698}, {"nombre": "Pedregal ", "precipitacion": 6.3562}, {"nombre": "Rayo de Sol", "precipitacion": 4.2698}]';
 
-  HomeScreen() {
-    List ListaJson = jsonDecode(quebradas) as List;
-    Quebradas = ListaJson.map((e) => Quebrada.fromJson(e)).toList();
-    print(Quebradas[0].nombre + " " + Quebradas[0].precipitacion.toString());
-  }
+  @override
+  void initState(){
+  List ListaJson = jsonDecode(quebradas) as List;
+  Quebradas = ListaJson.map((e) => Quebrada.fromJson(e)).toList();
+  print(Quebradas[0].nombre + " " + Quebradas[0].precipitacion.toString());
 
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,25 +33,36 @@ class HomeScreen extends StatelessWidget {
         actions: [
             PopupMenuButton(
                icon: Icon(Icons.account_circle_outlined,color: Colors.white),
-               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+               itemBuilder: (BuildContext context) =>[
                  const PopupMenuItem(
+                   value: 1,
                    child: ListTile(
                      leading: Icon(Icons.login_rounded),
                      title: Text('Iniciar Sesion'),
+                     
                    ),
                  ),
                  const PopupMenuItem(
+                   value: 2,
                    child: ListTile(
                      leading: Icon(Icons.app_registration_sharp),
                      title: Text('Registrarse'),
                    ),
-                 ),
+                 ),   
                ],
+               onSelected:(int menu){
+                if(menu==1){
+                  Navigator.push(context, MaterialPageRoute(builder:(context)=>UsuarioScreen()));
+
+                }else if(menu==2) {
+
+                }
+               } ,
              ),
         ],
       ),
       
-      body: Column(
+      body: ListView(
         children: [
 
           Container(
