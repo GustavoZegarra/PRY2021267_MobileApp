@@ -49,14 +49,14 @@ class IncidenteState extends State<IncidenteScreen> {
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.fromLTRB(15, 20, 15, 0),
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-              child: Text('REPORTAR UN INCIDENTE',
+              child: const Text('REPORTAR UN INCIDENTE',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.fromLTRB(15, 20, 15, 0),
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-              child: Text('Seleccione una Categoria: ',
+              child: const Text('Seleccione una Categoria: ',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             ),
             Container(
@@ -75,7 +75,7 @@ class IncidenteState extends State<IncidenteScreen> {
                   return DropdownMenuItem<String>(
                       value: val,
                       child: Text(val,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 13,
                               color: Colors.black54,
                               fontWeight: FontWeight.bold)));
@@ -92,7 +92,7 @@ class IncidenteState extends State<IncidenteScreen> {
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-              child: Text('Seleccione un Motivo: ',
+              child: const Text('Seleccione un Motivo: ',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             ),
             Container(
@@ -111,7 +111,7 @@ class IncidenteState extends State<IncidenteScreen> {
                   return DropdownMenuItem<String>(
                       value: val,
                       child: Text(val,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 13,
                               color: Colors.black54,
                               fontWeight: FontWeight.bold)));
@@ -134,7 +134,7 @@ class IncidenteState extends State<IncidenteScreen> {
                     child: TextFormField(
                         controller: TextEditingController(text: _information),
                         keyboardType: TextInputType.streetAddress,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintStyle: TextStyle(fontSize: 15),
                           focusedBorder: UnderlineInputBorder(
                               borderSide:
@@ -144,10 +144,10 @@ class IncidenteState extends State<IncidenteScreen> {
                                 BorderSide(color: Colors.black, width: 2.0),
                           ),
                         ))),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 InkWell(
                   focusColor: Colors.green,
-                  child: Icon(
+                  child: const Icon(
                     Icons.location_on,
                     color: Colors.red,
                     size: 50,
@@ -167,10 +167,10 @@ class IncidenteState extends State<IncidenteScreen> {
                 keyboardType: TextInputType.multiline,
                 minLines: 5, //Normal textInputField will be displayed
                 maxLines: 5, // when user presses enter it will adapt to it
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'DESCRIPCION DEL INCIDENTE (Opcional)',
                   hintStyle: TextStyle(color: Colors.grey),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(25)),
                       borderSide: BorderSide(color: Colors.black, width: 2.0)),
                   enabledBorder: OutlineInputBorder(
