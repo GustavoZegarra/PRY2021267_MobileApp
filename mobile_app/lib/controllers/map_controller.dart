@@ -6,20 +6,23 @@ class MapaController extends ChangeNotifier {
 
   Set<Marker> get markers => _markers.values.toSet();
 
+  static LatLng ubicacionChosica=const LatLng(-11.9430600, -76.7094400);
+  LatLng ubicacionMarcada=const LatLng(-11.9430600, -76.7094400);
+
   final initalCameraPosition = CameraPosition(
       //Chosica
-      target: LatLng(-11.9430600, -76.7094400),
+      target: ubicacionChosica,
       zoom: 15);
+
+  void actualizando(LatLng pos) {
+    ubicacionMarcada = pos;
+  }
 
   void onTap(LatLng position) {
     //unico identificador del marker
     final markerId = MarkerId("ola");
-    final marker = Marker(
-    markerId: markerId, 
-    position: position,
-    draggable: true
-    
-    );
+    final marker =
+        Marker(markerId: markerId, position: position, draggable: true);
     _markers[markerId] = marker;
     notifyListeners();
   }

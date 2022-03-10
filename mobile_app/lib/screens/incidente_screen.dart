@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile_app/controllers/incidente_controller.dart';
 import 'package:mobile_app/screens/screens.dart';
+import 'package:location/location.dart';
 
 class IncidenteScreen extends StatefulWidget {
   @override
@@ -8,36 +11,84 @@ class IncidenteScreen extends StatefulWidget {
 }
 
 class IncidenteState extends State<IncidenteScreen> {
+  String _lng = 'longitud';
+  String _ltd = 'latitud';
 
-   String _information = 'No Information Yet';
+  final controller = IncidenteController();
 
-  void updateInformation(String information) {
-    setState(() => _information = information);
+  @override
+  void initState() {
+    super.initState();
+    controller.lista_categoria.insert(0, 'Seleccione');
+    controller.lista_motivo.insert(0, 'Seleccione');
+  }
+
+  var location = Location();
+
+  late LocationData userLocation;
+
+  Future<LocationData?> _getLocation() async {
+    LocationData? currentLocation;
+    try {
+      currentLocation = await location.getLocation();
+      print(currentLocation.latitude.toString() +
+          " " +
+          currentLocation.longitude.toString());
+      ActualizarPosicion(currentLocation.longitude.toString(),
+          currentLocation.latitude.toString());
+    } catch (e) {
+      currentLocation = null;
+    }
+    return currentLocation;
+  }
+
+  void mostrarCuadro() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: const Text(
+                'En el mapa puede colocar un marcador para obtener la ubicación del lugar donde ocurre el incidente'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    sacarCuadro();
+                  },
+                  child: Text('Cerrar')),
+              TextButton(
+                onPressed: () {
+                  sacarCuadro();
+                  moveToMapaScreen();
+                },
+                child: Text('Ok'),
+              )
+            ],
+          );
+        });
+  }
+
+  void sacarCuadro() {
+    Navigator.pop(context);
+  }
+
+  void ActualizarPosicion(String longitud, String latitud) {
+    setState(
+      () {
+        _lng = longitud;
+        _ltd = latitud;
+      },
+    );
   }
 
   void moveToMapaScreen() async {
-    final information = await Navigator.push(
+    LatLng ubicacion = await Navigator.push(
       context,
       CupertinoPageRoute(
           fullscreenDialog: true, builder: (context) => MapaScreen()),
     );
-    updateInformation(information);
+    ActualizarPosicion(ubicacion.longitude.toString(),ubicacion.latitude.toString());
   }
 
-  String temp_cate = 'Seleccione';
-  final List<String> lista_categoria = <String>[
-    'Seleccione',
-    'LLuvia fuerte',
-    'Inundacion',
-    'Huayco'
-  ];
-  String temp_moti = 'Seleccione';
-  final List<String> lista_motivo = <String>[
-    'Seleccione',
-    'Inundacion en mi casa',
-    'Huayco por mi casa',
-    'Caida de poste de luz'
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,13 +116,13 @@ class IncidenteState extends State<IncidenteScreen> {
               margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
               child: DropdownButton(
-                value: temp_cate,
+                value: controller.temp_cate,
                 onChanged: (String? newValue) {
                   setState(() {
-                    temp_cate = newValue!;
+                    controller.temp_cate = newValue!;
                   });
                 },
-                items: lista_categoria.map((val) {
+                items: controller.lista_categoria.map((val) {
                   return DropdownMenuItem<String>(
                       value: val,
                       child: Text(val,
@@ -101,13 +152,13 @@ class IncidenteState extends State<IncidenteScreen> {
               margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
               child: DropdownButton(
-                value: temp_moti,
+                value: controller.temp_moti,
                 onChanged: (String? newValue) {
                   setState(() {
-                    temp_moti = newValue!;
+                    controller.temp_moti = newValue!;
                   });
                 },
-                items: lista_motivo.map((val) {
+                items: controller.lista_motivo.map((val) {
                   return DropdownMenuItem<String>(
                       value: val,
                       child: Text(val,
@@ -126,37 +177,86 @@ class IncidenteState extends State<IncidenteScreen> {
             ),
             Row(
               children: [
-                Container(
-                    width: 260,
-                    height: 60,
-                    margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                    child: TextFormField(
-                        controller: TextEditingController(text: _information),
-                        keyboardType: TextInputType.streetAddress,
-                        decoration: const InputDecoration(
-                          hintStyle: TextStyle(fontSize: 15),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 2.0)),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                          ),
-                        ))),
-                const SizedBox(width: 15),
-                InkWell(
-                  focusColor: Colors.green,
-                  child: const Icon(
-                    Icons.location_on,
-                    color: Colors.red,
-                    size: 50,
-                  ),
-                  onTap: () {
-                   moveToMapaScreen();
-
-                  },
+                Column(
+                  children: [
+                    Container(
+                        width: 200,
+                        height: 60,
+                        margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: TextFormField(
+                            controller: TextEditingController(text: _lng),
+                            keyboardType: TextInputType.streetAddress,
+                            decoration: const InputDecoration(
+                              hintStyle: TextStyle(fontSize: 15),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 2.0)),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 2.0),
+                              ),
+                            ))),
+                    Container(
+                        width: 200,
+                        height: 60,
+                        margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: TextFormField(
+                            controller: TextEditingController(text: _ltd),
+                            keyboardType: TextInputType.streetAddress,
+                            decoration: const InputDecoration(
+                              hintStyle: TextStyle(fontSize: 15),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 2.0)),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 2.0),
+                              ),
+                            ))),
+                  ],
                 ),
+                SizedBox(
+                  width: 40,
+                ),
+                Column(
+                  children: [
+                    InkWell(
+                      focusColor: Colors.green,
+                      child: const Icon(
+                        Icons.location_on,
+                        color: Colors.blue,
+                        size: 50,
+                      ),
+                      onTap: () {
+                        const snackBar = SnackBar(
+                          duration: Duration(seconds: 3),
+                          content: Text('Obteniendo Latitud y longitud de su ubicacion'),
+                        );
+
+                        _getLocation().then((value) {
+                          setState(() {
+                            userLocation = value!;
+                          });
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                    ),
+                    SizedBox(height: 15),
+                    InkWell(
+                      focusColor: Colors.green,
+                      child: const Icon(
+                        Icons.map_outlined,
+                        color: Colors.black38,
+                        size: 50,
+                      ),
+                      onTap: () {
+                        mostrarCuadro();
+                      },
+                    ),
+                  ],
+                )
               ],
             ),
             Container(

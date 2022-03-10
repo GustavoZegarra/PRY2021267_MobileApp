@@ -6,28 +6,22 @@ import 'package:provider/provider.dart';
 
 //Aca falta editar que en vez de que madne safety rain que mande una coordenada de latitud o long
 class MapaScreen extends StatelessWidget {
-  String ola = "Safety Rain";
+  //late GoogleMapController _controllerm;
+  //Location _location = Location();
+  LatLng? temp;
 
-  LatLng _initialcameraposition = LatLng(-12.028914, -77.081833);
-  late GoogleMapController _controllerm;
-  Location _location = Location();
-
-  void actualizando(LatLng pos) {
-    ola = pos.latitude.toString();
-  }
-
-  void _onMapCreated(GoogleMapController _cntlr) {
-    _controllerm = _cntlr;
-    _location.onLocationChanged.listen((l) {
-      print(l.latitude.toString() + " " + l.longitude.toString());
-      actualizando(LatLng(l.latitude!, l.longitude!));
-      _controllerm.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(l.latitude!, l.longitude!), zoom: 15),
-        ),
-      );
-    });
-  }
+  //void _onMapCreated(GoogleMapController _cntlr) {
+  //  _controllerm = _cntlr;
+  //  _location.onLocationChanged.listen((l) {
+  //    print(l.latitude.toString() + " " + l.longitude.toString());
+  //    actualizando(LatLng(l.latitude!, l.longitude!));
+  //    _controllerm.animateCamera(
+  //      CameraUpdate.newCameraPosition(
+  //        CameraPosition(target: LatLng(l.latitude!, l.longitude!), zoom: 15),
+  //      ),
+  //    );
+  //  });
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +29,24 @@ class MapaScreen extends StatelessWidget {
       create: (context) => MapaController(),
       child: WillPopScope(
         onWillPop: () async {
-          //envia el ola hacia atras
-          Navigator.pop(context, ola);
+          //envia el temp hacia atras
+          temp ??= const LatLng(-11.9430600, -76.7094400);
+          Navigator.pop(context, temp);
           return true;
         },
         child: Scaffold(
-          appBar: AppBar(title: Text(ola)),
+          appBar: AppBar(title: const Text("Safety Rain")),
           body: Consumer<MapaController>(
             builder: (_, controller, __) => GoogleMap(
                 markers: controller.markers,
-                initialCameraPosition:
-                    CameraPosition(target: _initialcameraposition),
-                onMapCreated: _onMapCreated,
+                initialCameraPosition: controller.initalCameraPosition,
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
                 zoomControlsEnabled: true,
                 onTap: (position) {
                   controller.onTap(position);
-                  //actualizando(position);
+                  controller.actualizando(position);
+                  temp = controller.ubicacionMarcada;
                 }),
           ),
         ),

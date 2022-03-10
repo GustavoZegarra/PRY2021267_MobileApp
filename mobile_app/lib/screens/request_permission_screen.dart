@@ -17,6 +17,30 @@ class RequestPermissionState extends State<RequestPermissionScreen> {
   final _controller = RequestPermissionController(Permission.locationWhenInUse);
   late StreamSubscription _subscription;
 
+  void showAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Permisos de Ubicacion'),
+            content: Text('Necesitaremos permisos para acceder a su ubicacion.'),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    _controller.request();
+                  },
+                  child: Text('ok')),
+              TextButton(
+                onPressed: () {
+                  exit(0);
+                },
+                child: Text('Cancel'),
+              )
+            ],
+          );
+        });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +49,7 @@ class RequestPermissionState extends State<RequestPermissionScreen> {
       (status) {
         //si nos dan acceso a la ubicacion del dispositivo
         if (status == PermissionStatus.granted) {
+          Navigator.of(context).pop();
           Navigator.pushReplacementNamed(context, 'tab');
         }
       },
@@ -41,52 +66,10 @@ class RequestPermissionState extends State<RequestPermissionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('Safety Rain')),
+    Future.delayed(Duration.zero, () => showAlert(context));
+      return Scaffold(
         body: Center(
-            child: Container(
-                margin: EdgeInsets.all(15),
-                width: MediaQuery.of(context).size.width,
-                height: 160,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black45, width: 8.0),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: const Text(
-                          'Permita que Safety Rain acceda a la ubicacion del dispositivo. Presione "OK" para continuar.',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold)),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          child: ElevatedButton(
-                            child: Text("OK"),
-                            onPressed: () {
-                              _controller.request();
-                            },
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          child: ElevatedButton(
-                            child: Text("Cancelar"),
-                            onPressed: () {
-                              exit(0);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ))));
+      child: CircularProgressIndicator(),
+    ));
   }
 }
