@@ -22,6 +22,7 @@ class HomeState extends State<HomeScreen> {
       '[{"nombre": "Quirio", "precipitacion": 5.69698, "ola":"peluca"}, {"nombre": "Pedregal ", "precipitacion": 6.3562}, {"nombre": "Rayo de Sol", "precipitacion": 4.2698}]';
 
   Future<void> RefreshListaQuebradas() async {
+    //print(Quebradas);
     //  List ListaJson = jsonDecode(quebradas) as List;
     //  List<Quebrada> Quebradas2 =
     //      ListaJson.map((e) => Quebrada.fromJson(e)).toList();
@@ -36,16 +37,22 @@ class HomeState extends State<HomeScreen> {
     //  print(response.reasonPhrase);
     //}
     String ola = "";
-    HttpClient httpClient = new HttpClient();
+    HttpClient httpClient = HttpClient();
     //PARA QUE ESTO FUNCION EN EL ASP NETCORE DEBE ESTAR CORRIENDO DESDE API APPLICATION (PUERTOS 5000 Y 5001) Y NO DESDE ISSL(ACA NO FUNCIONA EN FLUTTER)
     //https://10.0.2.2:5001/api/Alerta
-    HttpClientRequest request =
-        await httpClient.getUrl(Uri.parse("https://my-json-server.typicode.com/GustavoZegarra/JSONPlaceholder/posts"));
+    HttpClientRequest request = await httpClient.getUrl(Uri.parse(
+        "https://my-json-server.typicode.com/GustavoZegarra/JSONPlaceholder/posts"));
     //request.headers.add("user-agent", "");
     HttpClientResponse response = await request.close();
     ola = await response.transform(utf8.decoder).join();
-    print(ola);
+    //print(ola);
     httpClient.close();
+    
+    String quebradas2 =
+        '[{"nombre": "Quirio", "precipitacion": 0.3, "ola":"peluca"}, {"nombre": "Pedregal ", "precipitacion": 6.3562}, {"nombre": "Rayo de Sol", "precipitacion": 4.2698}]';
+    List ListaJson2 = jsonDecode(quebradas2) as List;
+    Quebradas = ListaJson2.map((e) => Quebrada.fromJson(e)).toList();
+    //print(Quebradas);
   }
 
   @override
@@ -53,8 +60,11 @@ class HomeState extends State<HomeScreen> {
     List ListaJson = jsonDecode(quebradas) as List;
     Quebradas = ListaJson.map((e) => Quebrada.fromJson(e)).toList();
     //print(Quebradas[0].nombre + " " + Quebradas[0].precipitacion.toString());
-    timer = Timer.periodic(
-        Duration(seconds: 5), (Timer t) => RefreshListaQuebradas());
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      setState(() {
+        RefreshListaQuebradas();
+      });
+    });
     super.initState();
     //ScaffoldMessenger.of(this.context).showSnackBar(SnackBar(content: Text("Ayudaaaaaa")));
   }
@@ -72,7 +82,8 @@ class HomeState extends State<HomeScreen> {
         title: const Text('Safety Rain'),
         actions: [
           PopupMenuButton(
-            icon: Icon(Icons.account_circle_outlined, color: Colors.white),
+            icon:
+                const Icon(Icons.account_circle_outlined, color: Colors.white),
             itemBuilder: (BuildContext context) => [
               const PopupMenuItem(
                 value: 1,
@@ -104,7 +115,7 @@ class HomeState extends State<HomeScreen> {
             alignment: Alignment.center,
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.all(15),
-            child: Text('QUEBRADAS ACTIVAS',
+            child: const Text('QUEBRADAS ACTIVAS',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ),
           Row(
@@ -115,7 +126,7 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     height: 120.0,
                     width: 120.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/Quirio.jpg'),
                         fit: BoxFit.fill,
@@ -137,7 +148,7 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     height: 120.0,
                     width: 120.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/Pedregal.jpg'),
                         fit: BoxFit.fill,
@@ -156,7 +167,7 @@ class HomeState extends State<HomeScreen> {
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.all(20)),
+          const Padding(padding: EdgeInsets.all(20)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -165,7 +176,7 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     height: 120.0,
                     width: 120.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/Quirio.jpg'),
                         fit: BoxFit.fill,
@@ -187,7 +198,7 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     height: 120.0,
                     width: 120.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/Pedregal.jpg'),
                         fit: BoxFit.fill,

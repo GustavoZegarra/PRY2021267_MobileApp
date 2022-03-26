@@ -6,17 +6,17 @@ import 'package:mobile_app/screens/screens.dart';
 import 'package:mobile_app/themes/app_theme.dart';
 
 //para correr un api que no esta en la nube
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+//class MyHttpOverrides extends HttpOverrides {
+//  @override
+//  HttpClient createHttpClient(SecurityContext? context) {
+//    return super.createHttpClient(context)
+//      ..badCertificateCallback =
+//          (X509Certificate cert, String host, int port) => true;
+//  }
+//}
 
 void main() {
-  HttpOverrides.global = MyHttpOverrides();
+  //HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 

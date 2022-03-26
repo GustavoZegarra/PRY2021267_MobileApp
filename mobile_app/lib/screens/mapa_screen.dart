@@ -42,6 +42,7 @@ class MapaScreen extends StatelessWidget {
                 initialCameraPosition: controller.initalCameraPosition,
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
+                
                 zoomControlsEnabled: true,
                 onTap: (position) {
                   controller.onTap(position);

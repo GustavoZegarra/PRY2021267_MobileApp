@@ -5,6 +5,8 @@ import 'package:mobile_app/controllers/incidente_controller.dart';
 import 'package:mobile_app/screens/screens.dart';
 import 'package:location/location.dart';
 
+import '../themes/app_theme.dart';
+
 class IncidenteScreen extends StatefulWidget {
   @override
   IncidenteState createState() => IncidenteState();
@@ -86,7 +88,8 @@ class IncidenteState extends State<IncidenteScreen> {
       CupertinoPageRoute(
           fullscreenDialog: true, builder: (context) => MapaScreen()),
     );
-    ActualizarPosicion(ubicacion.longitude.toString(),ubicacion.latitude.toString());
+    ActualizarPosicion(
+        ubicacion.longitude.toString(), ubicacion.latitude.toString());
   }
 
   @override
@@ -217,7 +220,7 @@ class IncidenteState extends State<IncidenteScreen> {
                             ))),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 40,
                 ),
                 Column(
@@ -232,7 +235,8 @@ class IncidenteState extends State<IncidenteScreen> {
                       onTap: () {
                         const snackBar = SnackBar(
                           duration: Duration(seconds: 3),
-                          content: Text('Obteniendo Latitud y longitud de su ubicacion'),
+                          content: Text(
+                              'Obteniendo Latitud y longitud de su ubicacion'),
                         );
 
                         _getLocation().then((value) {
@@ -243,7 +247,7 @@ class IncidenteState extends State<IncidenteScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     InkWell(
                       focusColor: Colors.green,
                       child: const Icon(
@@ -270,7 +274,7 @@ class IncidenteState extends State<IncidenteScreen> {
                 decoration: const InputDecoration(
                   hintText: 'DESCRIPCION DEL INCIDENTE (Opcional)',
                   hintStyle: TextStyle(color: Colors.grey),
-                  focusedBorder: const OutlineInputBorder(
+                  focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(25)),
                       borderSide: BorderSide(color: Colors.black, width: 2.0)),
                   enabledBorder: OutlineInputBorder(
@@ -278,6 +282,23 @@ class IncidenteState extends State<IncidenteScreen> {
                     borderSide: BorderSide(color: Colors.black, width: 2.0),
                   ),
                 ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                alignment: Alignment.center,
+                decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0)),
+                    color: AppTheme.primary),
+                child: const Text("Reportar",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
               ),
             ),
           ],
