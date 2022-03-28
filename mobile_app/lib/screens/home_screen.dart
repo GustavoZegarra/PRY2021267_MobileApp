@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_app/models/quebrada_model.dart';
-import 'package:mobile_app/screens/screens.dart';
+import 'package:mobile_app/screens/login_screen.dart';
+import 'package:mobile_app/screens/registro_screen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-import 'package:path/path.dart';
+import 'package:mobile_app/globals/globals.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -47,7 +47,7 @@ class HomeState extends State<HomeScreen> {
     ola = await response.transform(utf8.decoder).join();
     //print(ola);
     httpClient.close();
-    
+
     String quebradas2 =
         '[{"nombre": "Quirio", "precipitacion": 0.3, "ola":"peluca"}, {"nombre": "Pedregal ", "precipitacion": 6.3562}, {"nombre": "Rayo de Sol", "precipitacion": 4.2698}]';
     List ListaJson2 = jsonDecode(quebradas2) as List;
@@ -102,9 +102,16 @@ class HomeState extends State<HomeScreen> {
             ],
             onSelected: (int menu) {
               if (menu == 1) {
+                globals.idUsuario++;
+                print(globals.idUsuario);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UsuarioScreen()));
-              } else if (menu == 2) {}
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              } else if (menu == 2) {
+                globals.idUsuario--;
+                print(globals.idUsuario);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegistroScreen()));
+              }
             },
           ),
         ],
@@ -140,6 +147,9 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     child: Text("Precipitacion: " +
                         Quebradas[0].precipitacion.toString()),
+                  ),
+                  Container(
+                    child: Text("26/03/2022 - 10:00 pm"),
                   )
                 ],
               ),
@@ -162,6 +172,9 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     child: Text("Precipitacion: " +
                         Quebradas[1].precipitacion.toString()),
+                  ),
+                  Container(
+                    child: Text("26/03/2022 - 10:00 pm"),
                   )
                 ],
               ),
@@ -190,6 +203,9 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     child: Text("Precipitacion: " +
                         Quebradas[0].precipitacion.toString()),
+                  ),
+                  Container(
+                    child: Text("26/03/2022 - 10:00 pm"),
                   )
                 ],
               ),
@@ -212,6 +228,9 @@ class HomeState extends State<HomeScreen> {
                   Container(
                     child: Text("Precipitacion: " +
                         Quebradas[2].precipitacion.toString()),
+                  ),
+                  Container(
+                    child: Text("26/03/2022 - 10:14 pm"),
                   )
                 ],
               ),

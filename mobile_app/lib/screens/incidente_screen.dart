@@ -285,7 +285,9 @@ class IncidenteState extends State<IncidenteScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                print("ola_incidente");
+              },
               child: Container(
                 margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
                 alignment: Alignment.center,
