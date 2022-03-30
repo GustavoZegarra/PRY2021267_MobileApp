@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/models/quebrada_model.dart';
 import 'package:mobile_app/screens/login_screen.dart';
-import 'package:mobile_app/screens/registro_screen.dart';
+import 'package:mobile_app/screens/register_screen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile_app/globals/globals.dart' as globals;
@@ -110,7 +110,7 @@ class HomeState extends State<HomeScreen> {
                 globals.idUsuario--;
                 print(globals.idUsuario);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegistroScreen()));
+                    MaterialPageRoute(builder: (context) => RegisterScreen()));
               }
             },
           ),
