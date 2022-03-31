@@ -86,7 +86,7 @@ class _LoginForm extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                 child: Text('Ingresar',style: TextStyle(color: Colors.white))
               ),
-              onPressed: () => Navigator.pushReplacementNamed(context, 'home')
+              onPressed: () => Navigator.pushReplacementNamed(context, 'bottom_navigation')
             )
           ],
         ),

@@ -20,6 +20,7 @@ class PrimerMensajeState extends State<PrimerMensajeScreen> {
     _controller.addListener(() {
       if (_controller.routeName != null) {
         Navigator.pushReplacementNamed(context, _controller.routeName!);
+        //Navigator.pushReplacementNamed(context,'login');
       }
     });
   }

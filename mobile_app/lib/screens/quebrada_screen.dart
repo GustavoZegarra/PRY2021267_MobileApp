@@ -24,9 +24,6 @@ class QuebradaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Safety Rain'),
-        ),
         body: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           itemCount: quebradas.length,

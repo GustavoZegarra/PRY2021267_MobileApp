@@ -11,7 +11,7 @@ class PrimerMensajeController extends ChangeNotifier {
   //comprobar accesos de ubicacion
   Future<void> checkPermission() async {
     final isGranted = await _locationPermission.isGranted;
-    _routeName = isGranted ? 'tab' : 'requestPermission';
+    _routeName = isGranted ? 'login' : 'requestPermission';
     notifyListeners();
   }
 }

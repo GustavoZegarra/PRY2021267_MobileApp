@@ -1,9 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:mobile_app/screens/PrimerMensajeScreen.dart';
-import 'package:mobile_app/screens/login_screen.dart';
-import 'package:mobile_app/screens/register_screen.dart';
-import 'package:mobile_app/screens/request_permission_screen.dart';
+import 'package:mobile_app/routes/app_route.dart';
 import 'package:mobile_app/screens/screens.dart';
 import 'package:mobile_app/themes/app_theme.dart';
 
@@ -23,24 +20,25 @@ void main() {
 }
 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _currentIndex = 0;
+  final List<Widget> _pages = [ HomeScreen(),QuebradaScreen(),IncidenteScreen() ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Sistema de Alerta Temprana',
-        initialRoute: 'login',
-        routes: {
-          'login': (_) => const LoginScreen(),
-          'register': (_) => const RegisterScreen(),
-          'home': (_) => HomeScreen(),
-          'detail': (_) => DetailScreen(),
-          'tab': (_) => TabScreen(),
-          'requestPermission': (_) => RequestPermissionScreen(),
-          'pMensaje': (_) => PrimerMensajeScreen()
-        }
+        initialRoute: AppRoute.initialRoute,
+        routes: AppRoute.routes,
+        onGenerateRoute: AppRoute.onGenerateRoute,
+        theme: AppTheme.lightTheme,
     );
   }
 }

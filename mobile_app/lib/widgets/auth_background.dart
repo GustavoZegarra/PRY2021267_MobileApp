@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/themes/app_theme.dart';
 
 class AuthBackground extends StatelessWidget {
   const AuthBackground({ Key? key, required this.child }) : super(key: key);
@@ -32,7 +33,7 @@ class _HeaderIcon extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.symmetric(vertical: 50),
-        child: Icon(Icons.person_pin, color: Colors.white, size: 100,),
+        child: Icon(Icons.person_pin, color: AppTheme.secondary, size: 100,),
       ),
     );
   }
@@ -65,8 +66,8 @@ class _Box extends StatelessWidget {
   BoxDecoration _boxDecoration() => const BoxDecoration(
     gradient: LinearGradient(
       colors: [
-        Color.fromARGB(255, 29, 214, 228),
-        Colors.blueAccent
+        AppTheme.primaryGradient,
+        AppTheme.primary,
       ]
     )
   );

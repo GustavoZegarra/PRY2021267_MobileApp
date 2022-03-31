@@ -95,7 +95,6 @@ class IncidenteState extends State<IncidenteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Safety Rain')),
         body: ListView(
           children: [
             Container(

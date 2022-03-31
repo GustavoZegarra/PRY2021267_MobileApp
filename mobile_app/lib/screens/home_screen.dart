@@ -8,6 +8,9 @@ import 'package:mobile_app/screens/register_screen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile_app/globals/globals.dart' as globals;
+import 'package:mobile_app/widgets/widgets.dart';
+
+import '../widgets/card_table.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,6 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeState extends State<HomeScreen> {
+
+  // variables bottom navigation
+  int _currentIndex = 0;
+
   //const HomeScreen({Key? key}) : super(key: key);
   late List<Quebrada> Quebradas;
   Timer? timer;
@@ -78,53 +85,31 @@ class HomeState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Safety Rain'),
-        actions: [
-          PopupMenuButton(
-            icon:
-                const Icon(Icons.account_circle_outlined, color: Colors.white),
-            itemBuilder: (BuildContext context) => [
-              const PopupMenuItem(
-                value: 1,
-                child: ListTile(
-                  leading: Icon(Icons.login_rounded),
-                  title: Text('Iniciar Sesion'),
-                ),
-              ),
-              const PopupMenuItem(
-                value: 2,
-                child: ListTile(
-                  leading: Icon(Icons.app_registration_sharp),
-                  title: Text('Registrarse'),
-                ),
-              ),
-            ],
-            onSelected: (int menu) {
-              if (menu == 1) {
-                globals.idUsuario++;
-                print(globals.idUsuario);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
-              } else if (menu == 2) {
-                globals.idUsuario--;
-                print(globals.idUsuario);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegisterScreen()));
-              }
-            },
-          ),
-        ],
-      ),
       body: ListView(
         children: [
+
+          const SizedBox(height: 20),
+
           Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.all(15),
-            child: const Text('QUEBRADAS ACTIVAS',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            width: double.infinity,
+            child: const ListTile(
+              title: Text(
+                'Quebradas',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1
+                )),
+              subtitle: Text('Información de quebradas activas'),
+            ),
           ),
+
+          const SizedBox(height: 20),
+
+          CardTable(),
+
+          const SizedBox(height: 20),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -237,7 +222,7 @@ class HomeState extends State<HomeScreen> {
             ],
           )
         ],
-      ),
+      )
     );
   }
 }
