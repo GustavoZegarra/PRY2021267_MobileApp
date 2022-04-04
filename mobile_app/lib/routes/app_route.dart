@@ -6,16 +6,13 @@ class AppRoute {
   static const initialRoute = 'pMensaje';
 
   static Map<String, Widget Function(BuildContext)> routes = {
+          'pMensaje'          : (BuildContext context) => PrimerMensajeScreen(),
+          'requestPermission' : (BuildContext context) => RequestPermissionScreen(),
           'login'             : (BuildContext context) => const LoginScreen(),
           'register'          : (BuildContext context) => const RegisterScreen(),
-          'home'              : (BuildContext context) => HomeScreen(),
-          'detail'            : (BuildContext context) => DetailScreen(),
-          'tab'               : (BuildContext context) => TabScreen(),
-          'requestPermission' : (BuildContext context) => RequestPermissionScreen(),
-          'pMensaje'          : (BuildContext context) => PrimerMensajeScreen(),
           'bottom_navigation' : (BuildContext context) => const BottomNavigationScreen(),
-          'user'              : (BuildContext context) => const UserScreen(),
-          'configuration'     : (BuildContext context) => const ConfigurationScreen()
+          'home'              : (BuildContext context) => const HomeScreen(),
+          'quebrada'          : (BuildContext context) => QuebradaScreen(),
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings){

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/screens/screens.dart';
 import 'package:mobile_app/themes/app_theme.dart';
-import 'package:mobile_app/widgets/widgets.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   const BottomNavigationScreen({ Key? key }) : super(key: key);
@@ -12,22 +11,27 @@ class BottomNavigationScreen extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigationScreen> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [ HomeScreen(),QuebradaScreen(),IncidenteScreen() ];
+  final List<Widget> _pages = [ HomeScreen(),IncidenteScreen(),IncidenteScreen() ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Safety Rain'),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [AppTheme.primaryGradient,AppTheme.primary]
-            )
-          ),
-        ),
+        toolbarHeight: 80,  
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'SafetyRain',
+              style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600,letterSpacing: 1),
+            ),
+            Text(
+              'Visualiza la salud de tu ciudad',
+              style: TextStyle(fontSize: 15,fontWeight: FontWeight.w400),
+            ),
+          ]
+        )
       ),
-      drawer: SideMenu(),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -40,12 +44,12 @@ class _BottomNavigationState extends State<BottomNavigationScreen> {
             label: 'Inicio'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.water_drop),
-            label: 'Quebrada'
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.assignment_rounded),
             label: 'Reporte'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Cuenta'
           )
         ],
         onTap: (index){

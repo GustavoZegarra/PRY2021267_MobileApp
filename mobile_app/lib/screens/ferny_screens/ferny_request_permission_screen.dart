@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_app/controllers/request_permission_controller.dart';
-import 'package:mobile_app/screens/home_screen.dart';
-import 'package:mobile_app/screens/mapa_screen.dart';
+import 'package:mobile_app/screens/ferny_screens/ferny_home_screen.dart';
+import 'package:mobile_app/screens/ferny_screens/ferny_mapa_screen.dart';
 import 'package:mobile_app/screens/screens.dart';
 import 'package:permission_handler/permission_handler.dart';
 

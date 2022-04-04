@@ -5,7 +5,7 @@ import 'package:mobile_app/controllers/incidente_controller.dart';
 import 'package:mobile_app/screens/screens.dart';
 import 'package:location/location.dart';
 
-import '../themes/app_theme.dart';
+import '../../themes/app_theme.dart';
 
 class IncidenteScreen extends StatefulWidget {
   @override
