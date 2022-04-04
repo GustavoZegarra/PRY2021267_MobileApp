@@ -1,1 +1,0 @@
-export 'package:mobile_app/widgets/home_widgets/card_table_widget.dart';

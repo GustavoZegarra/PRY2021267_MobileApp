@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CardOptionScreen extends StatelessWidget {
+class ListCardWidget extends StatelessWidget {
 
   final IconData icon;
-  final Color iconBackgroundColor;
+  final Color color;
   final String title;
   final String subtitle;
-  final void func;
+  final String route;
 
-  const CardOptionScreen({ 
+  const ListCardWidget({ 
     Key? key, 
-    required this.icon, 
-    required this.iconBackgroundColor, 
-    required this.title, 
-    required this.subtitle, 
-    this.func 
+    this.icon = Icons.abc, 
+    this.color = Colors.white, 
+    this.title = 'No data', 
+    this.subtitle = 'No data', 
+    this.route = 'home',
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class CardOptionScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
       child: ElevatedButton(
-        onPressed: () { Navigator.pushNamed(context, 'quebrada');},
+        onPressed: () => Navigator.pushNamed(context,route),
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(1),
           backgroundColor: MaterialStateProperty.all(Colors.white),
@@ -32,12 +32,12 @@ class CardOptionScreen extends StatelessWidget {
           ),
         child: Card(
           elevation: 0,
-          child: Container(
+          child: SizedBox(
             height: 100,
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: iconBackgroundColor,
+                  backgroundColor: color,
                   child: Icon(icon,color: Colors.white),
                 ),
                 const SizedBox(width: 20),

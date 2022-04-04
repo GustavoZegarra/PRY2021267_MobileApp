@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/models/quebrada_model.dart';
 import 'package:mobile_app/themes/app_theme.dart';
-import 'package:mobile_app/widgets/quebrada_widget.dart';
 
 class QuebradaScreen extends StatelessWidget {
   //const QuebradaScreen({Key? key}) : super(key: key);

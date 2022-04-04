@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,12 +10,14 @@ import 'package:location/location.dart';
 
 import '../../themes/app_theme.dart';
 
-class IncidenteScreen extends StatefulWidget {
+import 'package:image_picker/image_picker.dart';
+
+class ReporteScreen extends StatefulWidget {
   @override
   IncidenteState createState() => IncidenteState();
 }
 
-class IncidenteState extends State<IncidenteScreen> {
+class IncidenteState extends State<ReporteScreen> {
   String _lng = 'longitud';
   String _ltd = 'latitud';
 
@@ -91,6 +96,9 @@ class IncidenteState extends State<IncidenteScreen> {
     ActualizarPosicion(
         ubicacion.longitude.toString(), ubicacion.latitude.toString());
   }
+
+  Uint8List imagenUtf8 = Uint8List(500); // averiguar el tamaño del 500
+  bool ver_imagen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -282,6 +290,34 @@ class IncidenteState extends State<IncidenteScreen> {
                   ),
                 ),
               ),
+            ),
+            IconButton(
+              onPressed: () async {
+                final picker = new ImagePicker();
+                final XFile? pickedFile = await picker.pickImage(
+                  source: ImageSource.camera,
+                  imageQuality: 100
+                );
+
+                if(pickedFile == null){
+                  ver_imagen = false;
+                  return;
+                }
+                
+                final Uint8List imageUint8List = await pickedFile.readAsBytes();
+                print(imageUint8List.length); // conocer el tamaño de una imagen
+                ver_imagen = true;
+
+                setState(() {
+                  imagenUtf8 = imageUint8List;
+                });
+              },
+              icon: Icon(Icons.camera_alt_outlined)
+            ),
+            Text('Falta configurar camara para iOS'),
+            Visibility(
+              visible: ver_imagen,
+              child: Image.memory(imagenUtf8)
             ),
             GestureDetector(
               onTap: () {

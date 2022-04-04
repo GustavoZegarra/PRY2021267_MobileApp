@@ -11,14 +11,15 @@ class AppRoute {
           'login'             : (BuildContext context) => const LoginScreen(),
           'register'          : (BuildContext context) => const RegisterScreen(),
           'bottom_navigation' : (BuildContext context) => const BottomNavigationScreen(),
+          
           'home'              : (BuildContext context) => const HomeScreen(),
           'quebrada'          : (BuildContext context) => QuebradaScreen(),
+          'incidente'         : (BuildContext context) => IncidenteScreen(),
+          'alerta'            : (BuildContext context) => AlertaScreen(),
+          'recomendacion'     : (BuildContext context) => RecomendacionScreen(),
+
+          'reporte'           : (BuildContext context) => ReporteScreen(),
+
+          'usuario'           : (BuildContext context) => ReporteScreen(),
   };
-
-  static Route<dynamic> onGenerateRoute(RouteSettings settings){
-    return MaterialPageRoute(
-      builder: (context) => const AlertScreen(),
-    );
-  }
-
 }

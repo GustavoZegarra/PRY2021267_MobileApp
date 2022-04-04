@@ -3,14 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_app/models/quebrada_model.dart';
-import 'package:mobile_app/screens/login_screens/login_screen.dart';
-import 'package:mobile_app/screens/login_screens/register_screen.dart';
+import 'package:mobile_app/screens/login/login_screen.dart';
+import 'package:mobile_app/screens/login/register_screen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile_app/globals/globals.dart' as globals;
 import 'package:mobile_app/widgets/widgets.dart';
-
-import '../../widgets/card_table.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -103,13 +101,6 @@ class HomeState extends State<HomeScreen> {
               subtitle: Text('Información de quebradas activas'),
             ),
           ),
-
-          const SizedBox(height: 20),
-
-          CardTable(),
-
-          const SizedBox(height: 20),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

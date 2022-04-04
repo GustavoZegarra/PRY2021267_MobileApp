@@ -11,7 +11,7 @@ class BottomNavigationScreen extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigationScreen> {
   int _currentIndex = 0;
-  final List<Widget> _pages = [ HomeScreen(),IncidenteScreen(),IncidenteScreen() ];
+  final List<Widget> _pages = [ HomeScreen(),ReporteScreen(),UsuarioScreen() ];
 
   @override
   Widget build(BuildContext context) {
