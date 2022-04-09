@@ -14,7 +14,9 @@ class AppRoute {
           
           'home'              : (BuildContext context) => const HomeScreen(),
           'quebrada'          : (BuildContext context) => QuebradaScreen(),
+          'quebrada_detail'   : (BuildContext context) => QuebradaDetailScreen(),
           'incidente'         : (BuildContext context) => IncidenteScreen(),
+          'incidente_tab'     : (BuildContext context) => IncidenteTabScreen(),
           'alerta'            : (BuildContext context) => AlertaScreen(),
           'recomendacion'     : (BuildContext context) => RecomendacionScreen(),
 

@@ -18,8 +18,7 @@ class HomeScreen extends StatelessWidget {
             _CardQuebrada(),
             _CardIncidente(),
             _CardAlerta(),
-            _CardRecomendacion(),
-            SizedBox(height: 20)
+            _CardRecomendacion()
           ],
         ),
       ),
@@ -78,7 +77,7 @@ class _CardIncidente extends StatelessWidget {
       color: Colors.amber,
       title: 'Incidentes',
       subtitle: 'Ver información de los incidentes reportado por los ciudadanos',
-      route: 'incidente',
+      route: 'incidente_tab',
     );
   }
 }

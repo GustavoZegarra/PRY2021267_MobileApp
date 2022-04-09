@@ -1,5 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/models/quebrada_model.dart';
 import 'package:mobile_app/widgets/widgets.dart';
+import 'dart:math';
+
+final List<String> q = [
+    'Nicolas de Pierola'
+    ,'Carossio'          
+    ,'La libertad'       
+    ,'Santo Domingo'     
+    ,'Nicolas de Pierola'
+    ,'Carossio'          
+    ,'La libertad'       
+    ,'Santo Domingo'     
+    ,'Nicolas de Pierola'
+    ,'Carossio'          
+    ,'La libertad'       
+    ,'Santo Domingo'     
+];
+
+const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum iaculis lorem in placerat.';
+
 
 class QuebradaScreen extends StatefulWidget {
 
@@ -12,23 +32,22 @@ class QuebradaScreen extends StatefulWidget {
 class _QuebradaScreenState extends State<QuebradaScreen> {
 
   final List<ListCardWidget> quebradas = [
-    ListCardWidget(title: 'Nicolas de Pierola',subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Carossio'          ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'La libertad'       ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Santo Domingo'     ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Nicolas de Pierola',subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Carossio'          ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'La libertad'       ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Santo Domingo'     ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Nicolas de Pierola',subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Carossio'          ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'La libertad'       ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,),
-    ListCardWidget(title: 'Santo Domingo'     ,subtitle: 'Descripción de la quebrada',icon: Icons.water_drop,color: Colors.indigo,)
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
+    ListCardWidget(title: q[Random().nextInt(q.length)].toString(),subtitle: description,icon: Icons.water_drop,color: Colors.indigo,route: 'quebrada_detail',),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Quebradas'),backgroundColor: Colors.indigo),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Column(

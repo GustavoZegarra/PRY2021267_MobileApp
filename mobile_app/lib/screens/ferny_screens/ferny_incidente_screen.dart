@@ -98,6 +98,7 @@ class IncidenteState extends State<ReporteScreen> {
   }
 
   Uint8List imagenUtf8 = Uint8List(500); // averiguar el tamaño del 500
+  String ferny_img = '';
   bool ver_imagen = false;
 
   @override
@@ -304,20 +305,24 @@ class IncidenteState extends State<ReporteScreen> {
                   return;
                 }
                 
-                final Uint8List imageUint8List = await pickedFile.readAsBytes();
-                print(imageUint8List.length); // conocer el tamaño de una imagen
+                //final Uint8List imageUint8List = await pickedFile.readAsBytes();
+                final String ferny = base64Encode(await pickedFile.readAsBytes());
+                print(ferny);
+                //print(imageUint8List.length); // conocer el tamaño de una imagen
                 ver_imagen = true;
 
                 setState(() {
-                  imagenUtf8 = imageUint8List;
+                  //imagenUtf8 = imageUint8List;
+                  ferny_img = ferny;
                 });
               },
               icon: Icon(Icons.camera_alt_outlined)
             ),
-            Text('Falta configurar camara para iOS'),
+            Text('ferny_img'),
             Visibility(
               visible: ver_imagen,
-              child: Image.memory(imagenUtf8)
+              //child: Image.memory(imagenUtf8)
+              child: Image.memory(base64Decode(ferny_img))
             ),
             GestureDetector(
               onTap: () {

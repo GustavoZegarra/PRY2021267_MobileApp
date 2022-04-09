@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../themes/app_theme.dart';
+
 class AuthInputDecorations{
   
   static InputDecoration authInputDecoration({
@@ -10,12 +12,12 @@ class AuthInputDecorations{
     return InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.blueAccent
+                    color: Colors.black
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                     width: 2
                   )
                 ),
@@ -24,7 +26,7 @@ class AuthInputDecorations{
                 labelStyle: TextStyle(
                   color: Colors.grey
                 ),
-                prefixIcon: prefixIcon != null ? Icon(prefixIcon,color: Colors.blueAccent) : null
+                prefixIcon: prefixIcon != null ? Icon(prefixIcon,color: Colors.grey) : null
               );
   }
 

@@ -33,7 +33,7 @@ class _HeaderIcon extends StatelessWidget {
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.symmetric(vertical: 50),
-        child: Icon(Icons.person_pin, color: AppTheme.secondary, size: 100,),
+        child: Icon(Icons.person_pin, color: Colors.white, size: 100,),
       ),
     );
   }
@@ -51,33 +51,15 @@ class _Box extends StatelessWidget {
       width: double.infinity,
       height: size.height * 0.3,
       decoration: _boxDecoration(),
-      child: Stack(
-        children: [
-          Positioned(child: _WaterDrop(), top: 90, left: 30),
-          Positioned(child: _WaterDrop(), top: -40, left: -30),
-          Positioned(child: _WaterDrop(), top: -50, right: -20),
-          Positioned(child: _WaterDrop(), bottom: -50, left: 10),
-          Positioned(child: _WaterDrop(), bottom: 120, right: 20),
-        ],
-      ),
     );
   }
 
   BoxDecoration _boxDecoration() => const BoxDecoration(
     gradient: LinearGradient(
       colors: [
-        AppTheme.primaryGradient,
+        Colors.blueAccent,
         AppTheme.primary,
       ]
     )
   );
-}
-
-class _WaterDrop extends StatelessWidget {
-  const _WaterDrop({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Icon(Icons.water_drop, color: Color.fromRGBO(255, 255, 255, 0.1),size: 100,);
-  }
 }

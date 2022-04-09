@@ -9,7 +9,10 @@ class Quebrada {
   );
 
   factory Quebrada.fromJson(dynamic json) {
-    return Quebrada(json['nombre'] as String, json['precipitacion'] as double);
+    return Quebrada(
+      json['nombre'] as String,
+      json['precipitacion'] as double
+    );
   }
 
 }
