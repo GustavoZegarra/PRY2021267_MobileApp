@@ -1,0 +1,1 @@
+export 'package:mobile_app/widgets/app_card_widget.dart';
