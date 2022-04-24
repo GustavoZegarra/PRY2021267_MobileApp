@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobile_app/exports/screens.dart';
+import 'package:mobile_app/exports/services.dart';
 import 'package:mobile_app/md_gps/blocs/gps_bloc.dart';
 import 'package:mobile_app/md_incidentes/ui/dropdownButtonFormField.dart';
+import 'package:mobile_app/themes/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class ReporteScreen extends StatefulWidget {
   const ReporteScreen({ Key? key }) : super(key: key);
@@ -38,20 +42,23 @@ class _ReporteScreenState extends State<ReporteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if(Provider.of<CategoriaService>(context).isLoading || Provider.of<MotivoService>(context).isLoading) return LoadingScreen(mensaje: 'Actualizando datos, por favor espere.');
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 20,),
-            const Text('Reportar incidentes',style: TextStyle(fontSize: 30),),
+            const SizedBox(height: 10,),
             Form(
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
                     child: DropdownButtonFormField(
+                      decoration: ReporteDropdownButtonFormFieldDecoration.decoration(
+                        label: 'Categoría'
+                      ),
                       hint: Text(categoria),
-                      items: categorias.map((e) => DropdownMenuItem(value: e,child: Text(e))).toList(),
+                      items: categorias.map((e) => DropdownMenuItem(value: e,child: Text(e),alignment: AlignmentDirectional.center,)).toList(),
                       onChanged: (value) => {
                         setState(() {
                           categoria = value.toString();
@@ -60,11 +67,13 @@ class _ReporteScreenState extends State<ReporteScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
                     child: DropdownButtonFormField(
                       hint: Text(motivo),
                       icon: const Icon(Icons.arrow_drop_down),
-                      //decoration: DropDownButtonFormFieldDecoration.decoration(),
+                      decoration: ReporteDropdownButtonFormFieldDecoration.decoration(
+                        label: 'Motivos'
+                      ),
                       items: motivos.map((e) => DropdownMenuItem(value: e,child: Text(e))).toList(),
                       onChanged: (value) => {
                         setState(() {
@@ -74,11 +83,13 @@ class _ReporteScreenState extends State<ReporteScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
                     child: DropdownButtonFormField(
                       hint: Text(quebrada),
                       icon: const Icon(Icons.arrow_drop_down),
-                      //decoration: DropDownButtonFormFieldDecoration.decoration(),
+                      decoration: ReporteDropdownButtonFormFieldDecoration.decoration(
+                        label: 'Quebradas'
+                      ),
                       items: quebradas.map((e) => DropdownMenuItem(value: e,child: Text(e))).toList(),
                       onChanged: (value) => {
                         setState(() {
@@ -88,6 +99,7 @@ class _ReporteScreenState extends State<ReporteScreen> {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         icon: Icon(Icons.location_on,color: isLocationPicked ? iconLocationActive : Colors.black,size: 30),
@@ -115,6 +127,7 @@ class _ReporteScreenState extends State<ReporteScreen> {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         icon: Icon(Icons.camera_alt,color: isPicturePicked ? iconCamaraActive : Colors.black,size: 30),
@@ -145,16 +158,33 @@ class _ReporteScreenState extends State<ReporteScreen> {
                       maxLines: 7,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
-                        hintText: 'Ingresa algun detalle de tu reporte',
+                        hintText: 'Ingrese algun detalle adicional',
                         hintStyle: TextStyle(
                           color: Colors.grey
                         ),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))
+                          borderRadius: BorderRadius.all(Radius.circular(5))
                         )
                       ),
                     ),
-                  )
+                  ),
+                  MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      side: const BorderSide(
+                        color: Colors.white,
+                        width: 1,
+                      )
+                    ),
+                    elevation: 0,
+                    color: Colors.amber,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 15),
+                      child: const Text('Registrar incidente',style: TextStyle(color: Colors.black))
+                    ),
+                    //onPressed: () => usuarioService.login(context,_correoController.text,_tokenController.text)
+                    onPressed: () => Navigator.pushReplacementNamed(context, 'bottomNavigationBar')
+                  ),
                 ],
               ),
             )

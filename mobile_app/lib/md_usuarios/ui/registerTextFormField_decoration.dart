@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/themes/app_theme.dart';
 
-class ReporteDropdownButtonFormFieldDecoration{
+class RegisterTextFormFieldDecoration{
   
   static InputDecoration decoration({
     required String label,

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_app/blocs/blocs.dart';
+import 'package:flutter/material.dart';
+import 'package:mobile_app/exports/blocs.dart';
 
 class GpsAccesoScreen extends StatelessWidget {
   const GpsAccesoScreen({ Key? key }) : super(key: key);

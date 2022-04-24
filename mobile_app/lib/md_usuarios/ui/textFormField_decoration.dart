@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/themes/app_theme.dart';
 
 class TextFormFieldDecoration{
   
@@ -15,7 +16,7 @@ class TextFormFieldDecoration{
       ),
       focusedBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.red,
+          color: AppTheme.primaryColor,
           width: 2
         )
       ),
@@ -24,7 +25,7 @@ class TextFormFieldDecoration{
       labelStyle: const TextStyle(
         color: Colors.grey
       ),
-      prefixIcon: prefixIcon != null ? Icon(prefixIcon,color: Colors.grey) : null
+      prefixIcon: prefixIcon != null ? Icon(prefixIcon,color: AppTheme.primaryColor) : null
     );
   }
 

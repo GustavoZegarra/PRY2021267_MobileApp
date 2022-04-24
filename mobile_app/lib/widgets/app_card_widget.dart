@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/md_quebradas/blocs/quebrada_bloc.dart';
 
 class AppCardWidget extends StatelessWidget {
 
@@ -8,7 +10,7 @@ class AppCardWidget extends StatelessWidget {
   final String footer;
   final String route;
 
-  AppCardWidget({ 
+  const AppCardWidget({ 
     Key? key,
     this.image = const AssetImage('assets/empty.png'),
     this.title = 'Title', 
@@ -22,7 +24,10 @@ class AppCardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: ElevatedButton(
-        onPressed: () => Navigator.pushNamed(context,route),
+        onPressed: () {
+          Navigator.pushNamed(context,route);
+          //BlocProvider.of<QuebradaBloc>(context).add(SetQuebradasEvent('xd'));
+        },
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(1),
           backgroundColor: MaterialStateProperty.all(Colors.white),

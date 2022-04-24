@@ -1,42 +1,53 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mobile_app/widgets/app_card_widget.dart';
+import 'package:mobile_app/exports/services.dart';
+import 'package:mobile_app/themes/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  static List<_CardOpcion> opciones = const [
-    _CardOpcion(
-      icon: Icon(Icons.water_drop,color: Colors.blueAccent),
-      title: 'Quebradas',
-      subtitle: 'Ver información de las quebradas registradas en el distrito de Chosica',
-      route: 'quebrada_list'),
-    _CardOpcion(
-      icon: Icon(Icons.assessment,color: Colors.amberAccent),
-      title: 'Incidentes',
-      subtitle: 'Ver información de los incidentes reportado por los ciudadanos',
-      route: 'incidente_list'),
-    _CardOpcion(
-      icon: Icon(Icons.assessment,color: Colors.redAccent),
-      title: 'Alertas',
-      subtitle: 'Revisar alertas emitidas por nuestros sensores en las diversas quebradas',
-      route: 'alerta_list'),
-    _CardOpcion(
-      icon: Icon(Icons.tips_and_updates,color: Colors.greenAccent),
-      title: 'Recomendaciones',
-      subtitle: '¿No sabes que hacer en caso de una inundación? Revisa aquí!',
-      route: 'alerta_list'),
-  ];
-
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<CategoriaService>(context).getCategorias();
+    Provider.of<MotivoService>(context).getMotivos();
+
+    const List<_CardOpcion> opciones = [
+    _CardOpcion(
+      icon: Icon(Icons.water_drop,color: Colors.grey),
+      title: 'Quebradas',
+      subtitle: 'Observa el estado de las quebradas del distrito y la información de los sensores instalados',
+      route: 'quebrada_list'),
+    _CardOpcion(
+      icon: Icon(Icons.assessment,color: Colors.grey),
+      title: 'Incidentes',
+      subtitle: 'Revisa los reportes registrados de incidentes identificados en el distrito',
+      route: 'incidente_list'),
+    _CardOpcion(
+      icon: Icon(Icons.assessment,color: Colors.grey),
+      title: 'Alertas',
+      subtitle: 'Revisa las alertas emitidas por nuestro sensores instalados en las quebradas del distrito',
+      route: 'alerta_list'),
+    _CardOpcion(
+      icon: Icon(Icons.tips_and_updates,color: Colors.grey),
+      title: 'Recomendaciones',
+      subtitle: 'Revisar recomendaciones a tener en cuenta durante una alerta emitida',
+      route: 'recomendacion_list'),
+    ];
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        _CardRecomendacion(),
+          Opacity(
+          opacity: 0.5,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height*0.3,
+            width: double.infinity,
+            child: const Image(image: AssetImage('assets/home.jpg'),fit: BoxFit.fill)
+          ),
+        ),
+        //const Divider(thickness: 15),
         Expanded(
           child: ListView.builder(
             itemCount: opciones.length,
@@ -49,97 +60,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _CardRecomendacion extends StatefulWidget {
-
-  _CardRecomendacion({
-    Key? key
-  }) : super(key: key);
-
-  @override
-  State<_CardRecomendacion> createState() => _CardRecomendacionState();
-}
-
-class _CardRecomendacionState extends State<_CardRecomendacion> {
-
-  int idxRecomendaciones = 0;
-
-  final List<String> recomendaciones = [
-    'En caso de que viva en una casa, revise los techos. Evite que haya objetos en ellos que puedan causar males mayores. Fíjese en los canales por donde corre el agua en su casa, verifique que las tuberías no estén obstruidas.',
-    'No arroje basura a la calle, ni a los ríos. Deposítela en los basureros.',
-    'Evite que las corrientes de agua sean obstaculizadas. En caso de que vea algún escombro apresúrese a quitarlo antes de que convierta su zona en un estanque.'
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-
-    final height = MediaQuery.of(context).size.height*0.3;
-    final width = MediaQuery.of(context).size.width;
-
-    return Stack(
-      children: [
-        Opacity(
-          opacity: 0.5,
-          child: SizedBox(
-            height: height,
-            width: width,
-            child: const Image(image: AssetImage('assets/home.jpg'),fit: BoxFit.fill)
-          ),
-        ),
-        SizedBox(
-          height: height,
-          width: width,
-          child: Opacity(
-            opacity: 0.8,
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.all(40),
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      recomendaciones[idxRecomendaciones],
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.keyboard_arrow_left,size: 20),
-                          onPressed: (){
-                            setState((){
-                              idxRecomendaciones -= 1;
-                              if (idxRecomendaciones == -1) idxRecomendaciones = 0;
-                            });
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.keyboard_arrow_right,size: 20),
-                          onPressed: (){
-                            setState((){
-                              idxRecomendaciones += 1;
-                              if (idxRecomendaciones == 3) idxRecomendaciones = 2;
-                            });
-                          },
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-}
-
 class _CardOpcion extends StatelessWidget {
-
   final Icon icon;
   final String title;
   final String subtitle;
@@ -155,17 +76,23 @@ class _CardOpcion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
-      child: Card(
-        elevation: 1,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))
-        ),
-        child: ListTile(
-          leading: icon,
-          title: Text(title),
-          subtitle: Text(subtitle),
-          onTap: () => Navigator.pushNamed(context,route),
+      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+      child: SizedBox(
+        height: 100,
+        child: Card(
+          elevation: 5,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            side: BorderSide(color: Colors.white)
+          ),
+          child: Center(
+            child: ListTile(
+              leading: icon,
+              title: Text(title),
+              subtitle: Text(subtitle),
+              onTap: () => Navigator.pushNamed(context,route),
+            ),
+          ),
         ),
       )
     );
