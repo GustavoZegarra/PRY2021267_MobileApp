@@ -23,6 +23,7 @@ void main() {
       providers: [
         BlocProvider<GpsBloc>(create: (_) => GpsBloc()),
         BlocProvider<QuebradaBloc>(create: (_) => QuebradaBloc()),
+        BlocProvider<RecomendacionBloc>(create: (_) => RecomendacionBloc()),
       ], 
       child: MultiProvider(
         providers: [
@@ -31,7 +32,8 @@ void main() {
           ChangeNotifierProvider<ApiPeruService>(create: (_) => ApiPeruService()),
           ChangeNotifierProvider<QuebradaService>(create: (_) => QuebradaService()),
           ChangeNotifierProvider<CategoriaService>(create: (_) => CategoriaService()),
-          ChangeNotifierProvider<MotivoService>(create: (_) => MotivoService())
+          ChangeNotifierProvider<MotivoService>(create: (_) => MotivoService()),
+          ChangeNotifierProvider<RecomendacionService>(create: (_) => RecomendacionService())
         ],
         child: const MyApp())
         )
