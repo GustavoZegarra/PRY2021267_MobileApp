@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app/exports/services.dart';
+import 'package:mobile_app/md_alertas/services/socket_service.dart';
+import 'package:mobile_app/screens/loading_screen.dart';
 import 'package:mobile_app/themes/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -9,8 +11,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<CategoriaService>(context).getCategorias();
-    Provider.of<MotivoService>(context).getMotivos();
+    //Provider.of<CategoriaService>(context).getCategorias();
+    //Provider.of<MotivoService>(context).getMotivos();
+    Provider.of<SocketService>(context);
 
     const List<_CardOpcion> opciones = [
     _CardOpcion(
@@ -22,17 +25,7 @@ class HomeScreen extends StatelessWidget {
       icon: Icon(Icons.assessment,color: Colors.grey),
       title: 'Incidentes',
       subtitle: 'Revisa los reportes registrados de incidentes identificados en el distrito',
-      route: 'incidente_list'),
-    _CardOpcion(
-      icon: Icon(Icons.assessment,color: Colors.grey),
-      title: 'Alertas',
-      subtitle: 'Revisa las alertas emitidas por nuestro sensores instalados en las quebradas del distrito',
-      route: 'alerta_list'),
-    _CardOpcion(
-      icon: Icon(Icons.tips_and_updates,color: Colors.grey),
-      title: 'Recomendaciones',
-      subtitle: 'Revisar recomendaciones a tener en cuenta durante una alerta emitida',
-      route: 'recomendacion_list'),
+      route: 'incidente_list')
     ];
 
     return Scaffold(

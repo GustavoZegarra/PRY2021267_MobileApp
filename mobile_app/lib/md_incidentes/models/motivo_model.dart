@@ -3,7 +3,7 @@ import 'dart:convert';
 class Motivo {
     Motivo({
         this.idMotivo = 0,
-        this.detalle = 'default',
+        this.detalle = '',
         this.idCategoria = 0,
         this.categoria,
         this.incidentes,
@@ -15,7 +15,14 @@ class Motivo {
     dynamic categoria;
     dynamic incidentes;
 
-    factory Motivo.fromJson(String str) => Motivo.fromMap(json.decode(str));
+    factory Motivo.fromJson(dynamic json) {
+    return Motivo(
+        idMotivo: json["idMotivo"],
+        detalle: json["detalle"],
+        idCategoria: json["idCategoria"],
+        categoria: json["categoria"],
+        incidentes: json["incidentes"],
+    );}
 
     String toJson() => json.encode(toMap());
 

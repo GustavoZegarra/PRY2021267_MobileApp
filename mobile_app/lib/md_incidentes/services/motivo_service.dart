@@ -7,11 +7,15 @@ class MotivoService extends ChangeNotifier {
 
  final String _baseUrl = 'https://safetysat.azurewebsites.net/api/Motivos';
   List<Motivo> motivos = [];
+  List<Motivo> motivos2 = [];
+  List<Motivo> motivosFiltered = [];
   bool isLoading = true;
 
-  MotivoService();
+  MotivoService(){
+    loadMotivos();
+  }
 
-  Future getMotivos() async {
+  Future loadMotivos() async {
     isLoading = true;
     notifyListeners(); 
     final url = Uri.parse(_baseUrl);
@@ -21,6 +25,25 @@ class MotivoService extends ChangeNotifier {
     motivos = data.map((e) => Motivo.fromJson(e)).toList();
     isLoading = false;
     notifyListeners();
+  }
+
+  update(int idCategoria){
+    motivos2 = [];
+    for(int i = 0; i < motivos.length; i++){
+      if(motivos[i].idCategoria == idCategoria){
+        motivos2.add(motivos[i]);
+      }
+    }
+  }
+
+  filterByIdCategoria(int idCategoria){
+    List<Motivo> values = [];
+    for(int i = 0; i < motivos.length; i++){
+      if(motivos[i].idCategoria == idCategoria){
+        values.add(motivos[i]);
+      }
+    }
+    return values;
   }
 
 }

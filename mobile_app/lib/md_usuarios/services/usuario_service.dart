@@ -51,6 +51,14 @@ class UsuarioService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<Usuario> getUsuarioById(int id) async {
+    final url = Uri.parse(_baseUrl+'api/usuarios/'+id.toString());
+    final resp = await http.get(url, headers: {'Content-Type':'application/json'});
+    String body = utf8.decode(resp.bodyBytes);
+    final user = Usuario.fromJson(jsonDecode(body));
+    return user;
+  }
+
   Future login (BuildContext context,String correo, String token) async {
 
     showDialog(

@@ -6,9 +6,11 @@ class ReporteDropdownButtonFormFieldDecoration{
   static InputDecoration decoration({
     required String label,
     IconData? prefixIcon,
-    Widget? suffixIcon
+    Widget? suffixIcon,
+    bool enabled = true,
   }){
     return InputDecoration(
+      enabled: enabled,
       hintStyle: const TextStyle(color: Colors.grey),
       focusColor: Colors.grey,
       label: Text(label, style: const TextStyle(color: Colors.grey)),

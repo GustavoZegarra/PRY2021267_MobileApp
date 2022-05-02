@@ -13,7 +13,6 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppTheme.appBarTheme,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

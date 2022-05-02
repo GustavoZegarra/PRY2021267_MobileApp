@@ -7,6 +7,11 @@ class SetIndexEvent extends QuebradaEvent {
   SetIndexEvent(this.idQuebrada);
 }
 
+class SetQuebradaEvent extends QuebradaEvent {
+  final Quebrada quebrada;
+  SetQuebradaEvent(this.quebrada);
+}
+
 class SetQuebradasEvent extends QuebradaEvent {
   final List<Quebrada> quebradas;
   SetQuebradasEvent(this.quebradas);

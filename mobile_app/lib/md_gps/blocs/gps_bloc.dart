@@ -76,9 +76,9 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
 
   }
 
-  Future<String> getCurrentLocation() async {
+  Future<List<double>> getCurrentLocation() async {
     var position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    return 'Latitud: ${position.latitude} - Longitud: ${position.longitude}';
+    return [position.latitude,position.longitude];
   }
 
   @override

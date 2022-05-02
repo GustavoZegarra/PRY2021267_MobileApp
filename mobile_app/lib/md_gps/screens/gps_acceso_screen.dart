@@ -45,7 +45,7 @@ class _BotonAccesoState extends State<_BotonAcceso> {
             final gpsBloc = BlocProvider.of<GpsBloc>(context);
             gpsBloc.askGpsAcces();
             if (gpsBloc.state.isAllgranted){
-              location = await gpsBloc.getCurrentLocation();
+              List<double> location = await gpsBloc.getCurrentLocation();
               setState(() { });
             }
           },

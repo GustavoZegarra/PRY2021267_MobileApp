@@ -9,9 +9,11 @@ class CategoriaService extends ChangeNotifier {
   List<Categoria> categorias = [];
   bool isLoading = true;
 
-  CategoriaService();
+  CategoriaService(){
+    loadCategorias();
+  }
 
-  Future getCategorias() async {
+  Future loadCategorias() async {
     isLoading = true;
     notifyListeners(); 
     final url = Uri.parse(_baseUrl);

@@ -11,7 +11,12 @@ class Categoria {
     String detalle;
     dynamic motivos;
 
-    factory Categoria.fromJson(String str) => Categoria.fromMap(json.decode(str));
+    factory Categoria.fromJson(dynamic json) {
+    return Categoria(
+        idCategoria: json["idCategoria"],
+        detalle: json["detalle"],
+        motivos: json["motivos"],
+    );}
 
     String toJson() => json.encode(toMap());
 
